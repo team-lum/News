@@ -58,7 +58,7 @@ task cleanVersion(type:Delete) {
     doLast {
         subprojects.each { module ->
             if (module.runnable) {
-                delete(module.name + '/src/main/resources/value.json')
+                delete(module.name + '/src/main/resources/version.json')
             }
         }
     }
@@ -68,6 +68,11 @@ task cleanVersion(type:Delete) {
  * Generate value file before build
  */
 task build(dependsOn: 'generateVersion')
+
+/**
+ * Generate value file before build
+ */
+task test(dependsOn: 'generateVersion')
 
 
 /**
