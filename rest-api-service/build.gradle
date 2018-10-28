@@ -1,3 +1,7 @@
+ext {
+    runnable = true
+}
+
 version '1.0-SNAPSHOT'
 
 buildscript {
@@ -19,4 +23,5 @@ bootJar {
 
 dependencies {
     compile project(":lib/model-service")
+    compile project(":lib/util-service")
 }
