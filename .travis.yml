@@ -1,0 +1,9 @@
+language: java
+os: linux
+jdk:
+  - oraclejdk8
+
+script:
+  - git tag -a v.build -m "Build"
+  - ./gradlew test
+  - git tag -d v.build
