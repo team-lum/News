@@ -18,9 +18,59 @@ subprojects {
 
         compile("org.projectlombok:lombok:1.18.2")
 
-        testCompile("org.junit.jupiter:junit-jupiter-api:5.3.1")
-        testCompile("org.junit.jupiter:junit-jupiter-params:5.3.1")
+        testCompile("org.springframework.boot:spring-boot-starter-test:2.0.6.RELEASE")
         testRuntime("org.junit.jupiter:junit-jupiter-engine:5.3.1")
+        testCompile("org.junit.jupiter:junit-jupiter-params:5.3.1")
+        testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
         testRuntime("org.mockito:mockito-core:2.21.0")
+        testCompile('org.mockito:mockito-junit-jupiter:2.18.3')
     }
 }
+
+/**
+ * Get value
+ */
+task getGitVersion(type: Exec) {
+    executable = 'git'
+    args = ['describe']
+    standardOutput = new ByteArrayOutputStream()
+}
+
+/**
+ * Generate file with value value for runnable modules
+ */
+task generateVersion(dependsOn: 'getGitVersion') {
+
+    def version = tasks.getGitVersion.standardOutput
+
+    doLast {
+        subprojects.each { module ->
+            if (module.runnable) {
+                new File(module.name + '/src/main/resources/version.json')
+                        .text = '{\n\t\"value\": \"' + version.toString().trim() + '\"\n}'
+                println '['+ module.name + '] version.json created'
+            }
+        }
+    }
+}
+
+task cleanVersion(type:Delete) {
+    doLast {
+        subprojects.each { module ->
+            if (module.runnable) {
+                delete(module.name + '/src/main/resources/value.json')
+            }
+        }
+    }
+}
+
+/**
+ * Generate value file before build
+ */
+task build(dependsOn: 'generateVersion')
+
+
+/**
+ * Delete value.json file
+ */
+task clean(dependsOn: 'cleanVersion')
