@@ -23,11 +23,11 @@ __Step4:__
   Run project.
   
 __Step5:__
-  Check status of the server typing *telnet 127.0.0.1 8080*. If you see message *Connected to 127.0.0.* - server is successfully
-  running.
+  Check status of the server typing *telnet 127.0.0.1 8080*. If you see message *Connected to 127.0.0.1* - server 
+  is successfully running.
   
 __Step6:__
-  Be happy to use this app.
+  Be happy to use this project
 
 
 
