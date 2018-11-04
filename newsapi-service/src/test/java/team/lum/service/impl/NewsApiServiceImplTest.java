@@ -1,4 +1,4 @@
-package team.lum.service;
+package team.lum.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.hamcrest.Matchers;
@@ -10,8 +10,9 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import team.lum.model.newsapi.Article;
-import team.lum.model.newsapi.NewsapiResponse;
+import team.lum.model.newsapi.dto.Article;
+import team.lum.model.newsapi.response.NewsapiResponse;
+import team.lum.service.impl.impl.NewsApiServiceImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,19 +23,20 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 
 @Slf4j
-public class NewsapiServiceTest {
+public class NewsApiServiceImplTest {
 
     @Mock
     private RestTemplate restTemplate;
     private String apiKey;
 
-    private NewsapiService newsapiService;
+    private NewsApiServiceImpl newsApiServiceImpl;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         apiKey = "bitcoin";
-        newsapiService = new NewsapiService(restTemplate, apiKey);
+        newsApiServiceImpl = new NewsApiServiceImpl(restTemplate, apiKey);
+
     }
 
     @Test
@@ -48,7 +50,7 @@ public class NewsapiServiceTest {
         Mockito.when(restTemplate.getForEntity(anyString(), any()))
                 .thenReturn(responseEntity);
 
-        List<Article> actual = newsapiService.getArticles("a", from, to, "a", true);
+        List<Article> actual = newsApiServiceImpl.getArticles("a", from, to, "a", true);
         List<Article> expected = new ArrayList<>();
 
         String expectedUrl = "https://newsapi.org/v2/top-headlines";
@@ -63,5 +65,18 @@ public class NewsapiServiceTest {
                 .getForEntity(expectedUrl, NewsapiResponse.class);
 
         Assert.assertThat(actual, Matchers.equalTo(expected));
+    }
+
+
+    @Test
+    public void testComposeUrl(){
+
+        String language = null;
+        String country = "us";
+
+        String expectedUrlWithCountry = NewsApiServiceImpl.API_URL +"sources?"+ "country=" + country + "&" +  "apiKey=" + this.apiKey;
+        String actual = newsApiServiceImpl.composeUrl(language, country);
+
+        Assert.assertThat(expectedUrlWithCountry, Matchers.equalTo(actual));
     }
 }

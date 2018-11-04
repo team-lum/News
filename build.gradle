@@ -2,6 +2,7 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'jacoco'
+    apply plugin: 'pmd'
 
 
 
@@ -45,6 +46,12 @@ subprojects {
                 }
             }
         }
+    }
+    
+    pmd {
+        ignoreFailures = true
+        sourceSets = [sourceSets.main]
+        reportsDir = file("$project.buildDir/reports/pmd")
     }
 
     check.dependsOn jacocoTestCoverageVerification

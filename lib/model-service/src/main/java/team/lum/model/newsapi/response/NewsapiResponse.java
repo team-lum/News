@@ -1,7 +1,8 @@
-package team.lum.model.newsapi;
+package team.lum.model.newsapi.response;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import team.lum.model.newsapi.dto.Article;
 
 import java.util.List;
 
