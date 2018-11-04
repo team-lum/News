@@ -1,4 +1,4 @@
-package team.lum.model.newsapi;
+package team.lum.model.newsapi.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
