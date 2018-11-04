@@ -10,7 +10,7 @@ import team.lum.model.Version;
 
 @Slf4j
 @RestController
-@RequestMapping("/version")
+@RequestMapping("/api/version")
 public class VersionController {
 
     private final Version version;
