@@ -18,4 +18,10 @@
 
 # Build #
 build/
+out/
 version.json
+
+# js #
+node_modules
+
+/rest-api-service/src/main/resources/static

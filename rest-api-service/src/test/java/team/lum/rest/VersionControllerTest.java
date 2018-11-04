@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import team.lum.Application;
+import team.lum.RestApiService;
 import team.lum.model.Version;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Slf4j
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = Application.class)
+@ContextConfiguration(classes = RestApiService.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class VersionControllerTest {
 
@@ -39,7 +39,7 @@ public class VersionControllerTest {
     public void version() throws Exception {
 
         this.mockMvc.perform(
-                get("/version")
+                get("/api/version")
                         .accept(MediaType.APPLICATION_JSON_VALUE)
         )
                 .andDo(print())
