@@ -30,7 +30,7 @@ public class VersionControllerTest {
     private Version version;
 
     @Before
-    public void setup() {
+    public void setUp() {
         this.version = new Version().setValue("v1.0");
         this.mockMvc = MockMvcBuilders.standaloneSetup(new VersionController(this.version)).build();
     }
