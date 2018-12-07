@@ -1,6 +1,9 @@
 rootProject.name = 'news'
 include 'rest-api-service'
+include 'newsapi-service'
+
 include 'lib/model-service'
 include 'lib/util-service'
-include 'newsapi-service'
+include 'lib/version-service'
+
 

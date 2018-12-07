@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import team.lum.model.newsapi.dto.Article;
-import team.lum.model.newsapi.response.NewsapiResponse;
 import team.lum.model.newsapi.dto.Source;
+import team.lum.model.newsapi.response.NewsapiResponse;
 import team.lum.model.newsapi.response.SourceResponse;
 import team.lum.service.impl.NewsApiService;
 
