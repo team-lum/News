@@ -19,7 +19,9 @@
   Open project in IDE. Install Lombok Plugin and restart IDE. Then while your IDE will be importing libraries enable auto-import (it will be proposed to you).
   
   Build project with *gradle*. In the root directory of the project execute command:
-  
+   - *cd web-front/*
+   - *npm install*
+   - *cd ..*
    - *./gradlew clean copyWebFront build* 
   <hr>
   
