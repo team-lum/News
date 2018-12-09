@@ -1,0 +1,7 @@
+ext {
+    runnable = false
+}
+
+dependencies {
+    compile project(":lib/model-service")
+}

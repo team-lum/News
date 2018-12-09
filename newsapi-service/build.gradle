@@ -25,4 +25,5 @@ dependencies {
     compile project(":lib/model-service")
     compile project(":lib/util-service")
     compile project(":lib/version-service")
+    compile project(":lib/elasticsearch-service")
 }
