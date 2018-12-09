@@ -1,2 +1,11 @@
+server:
+  port: 8081
+
 newsapi:
   key: f40cda7c5e3a4047be569d76851f2b5d
+
+spring:
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9300

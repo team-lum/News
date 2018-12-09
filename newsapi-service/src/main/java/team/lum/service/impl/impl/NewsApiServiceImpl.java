@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import team.lum.model.newsapi.dto.Article;
-import team.lum.model.newsapi.response.NewsapiResponse;
 import team.lum.model.newsapi.dto.Source;
+import team.lum.model.newsapi.response.NewsapiResponse;
 import team.lum.model.newsapi.response.SourceResponse;
 import team.lum.service.impl.NewsApiService;
 
@@ -51,23 +51,31 @@ public class NewsApiServiceImpl implements NewsApiService {
     }
 
     @Override
-    public List<Source> getSources(String language, String country){
+    public List<Source> getSources(String language, String country) {
 
         String url = composeUrl(language, country);
 
         ResponseEntity<SourceResponse> response = restTemplate.getForEntity(url, SourceResponse.class);
 
-        if (!"ok".equals(Objects.requireNonNull(response.getBody()).getStatus()))
+        SourceResponse body = response.getBody();
+
+        if (!"ok".equals(Objects.requireNonNull(body).getStatus()))
             return new ArrayList<>();
 
-        return response.getBody().getSources();
+        return body.getSources();
     }
 
     public String composeUrl(String language, String country){
         String url = API_URL + "sources?";
 
-        if (language != null) url += "language=" + language + "&";
-        if (country != null) url += "country=" + country + "&";
+        if (language != null) {
+            url += "language=" + language + "&";
+        }
+
+        if (country != null) {
+            url += "country=" + country + "&";
+        }
+
         url += "apiKey=" + this.apiKey;
 
         return url;

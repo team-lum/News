@@ -19,7 +19,9 @@
   Open project in IDE. Install Lombok Plugin and restart IDE. Then while your IDE will be importing libraries enable auto-import (it will be proposed to you).
   
   Build project with *gradle*. In the root directory of the project execute command:
-  
+   - *cd web-front/*
+   - *npm install*
+   - *cd ..*
    - *./gradlew clean copyWebFront build* 
   <hr>
   
@@ -37,8 +39,8 @@
   Be happy to use this project
 
 
-
-
-
-
-
+## Docker
+  To run project with docker (Linux):
+  - *sudo apt-get install docker-compose* (Or install docker-compose in different way)
+  - *./gradlew clean copyWebFront build* (Build project)
+  - *sudo docker-compose up* (Build and run docker images. If elk container will fall, follow this [link](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html))
