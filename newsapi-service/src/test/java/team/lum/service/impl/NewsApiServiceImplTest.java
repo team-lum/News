@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import team.lum.model.newsapi.dto.Article;
 import team.lum.model.newsapi.response.NewsapiResponse;
+import team.lum.model.newsapi.response.SourceResponse;
 import team.lum.service.impl.impl.NewsApiServiceImpl;
 
 import java.text.SimpleDateFormat;
@@ -79,4 +80,15 @@ public class NewsApiServiceImplTest {
 
         Assert.assertThat(expectedUrlWithCountry, Matchers.equalTo(actual));
     }
+
+    @Test
+    public void testGetSources(){
+        SourceResponse response = new SourceResponse().setSources(new ArrayList<>());
+        ResponseEntity<Object> responseEntity = ResponseEntity.ok(response);
+        Mockito.when(restTemplate.getForEntity(anyString(), any()))
+                .thenReturn(responseEntity);
+        Assert.assertEquals(new ArrayList<>(),newsApiServiceImpl.getSources("EN", "US"));
+    }
+
+
 }
