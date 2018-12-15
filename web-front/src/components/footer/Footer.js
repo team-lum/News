@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import './Footer.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import VersionService from "../../service/VersionService";
 
 
 class Footer extends Component {
+    constructor(props) {
+        super(props);
+        VersionService.getVersion(json => {
+            let state = this.state;
+            state.api_version = json.value;
+            this.setState(state);
+        });
+    }
     render() {
         return (
             <footer className={'footer bg-light'}>
