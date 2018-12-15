@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
 import './NavBar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import logo from "../../logo.svg";
 
 class NavBar extends Component {
     render() {
         return (
             <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
                 <a className={'navbar-brand'} href="#">News</a>
+
+                {/*<div className="App">*/}
+                    {/*<header className="App-header">*/}
+                        {/*<img src={logo} className="App-logo" alt="logo"/>*/}
+                    {/*</header>*/}
+                {/*</div>*/}
 
                 <div className={'collapse navbar-collapse'} id="navbarSupportedContent">
                     <ul className={'navbar-nav mr-auto'}>
