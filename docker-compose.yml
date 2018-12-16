@@ -17,7 +17,7 @@ services:
     image: sebp/elk
     environment:
       ELASTICSEARCH_START: 1
-      KIBANA_START: 0
+      KIBANA_START: 1
       LOGSTASH_START: 0
     ports:
     - "5601:5601"

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './NavBar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from "../../logo.svg";
 
 class NavBar extends Component {
     render() {
