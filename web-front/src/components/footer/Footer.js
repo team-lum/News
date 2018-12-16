@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class Footer extends Component {
     render() {
         return (
-            <footer className={'footer bg-light'}>
+            <footer className={'footer bg-dark'}>
                 <div className={'container-fluid'}>
                     <div className={'row'}>
                         <div className={'col text-left'}>
