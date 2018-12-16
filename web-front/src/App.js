@@ -97,7 +97,7 @@ class App extends Component {
                 </div>
 
                 <div>
-                    <button onClick={this.nextPage}>Load more</button>
+                    <button className={'showMore'} onClick={this.nextPage}>Load more</button>
                 </div>
 
                 <div className={'divFooter'}>
