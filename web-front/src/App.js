@@ -1,37 +1,22 @@
 import React, {Component} from 'react';
 import NavBar from './components/navbar/NavBar.js'
 import Footer from "./components/footer/Footer";
-import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import VersionService from "./service/VersionService";
 import Article from "./components/article/Article";
-import News from "./model/News";
+import ArticleService from "./service/ArticleService";
 
 class App extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            articles: [
-                new News("Vovan",
-                    "IT",
-                    "https://amp.businessinsider.com/images/5c1436bf2a5b74245b1b458b-960-480.jpg",
-                    "https://amp.businessinsider.com/images/5c1436bf2a5b74245b1b458b-960-480.jpg",
-                    "212.1298.1987",
-                    "jhbvjdbvjdbv"),
-                new News("Vovan",
-                    "IT",
-                    "https://amp.businessinsider.com/images/5c1436bf2a5b74245b1b458b-960-480.jpg",
-                    "https://amp.businessinsider.com/images/5c1436bf2a5b74245b1b458b-960-480.jpg",
-                    "212.1298.1987",
-                    "jhbvjdbvjdbv")
-            ]
+          articles: []
         };
-        VersionService.getVersion(json => {
+        ArticleService.getArticles(0, 3, json => {
             this.setState({
-                api_version: json.value
-            });
+                articles: json.content
+            })
         });
     }
 

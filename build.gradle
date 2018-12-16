@@ -91,6 +91,16 @@ task cleanVersion(type:Delete) {
     }
 }
 
+task dockerBuild(type: Exec) {
+    executable = 'docker-compose'
+    args = ['build']
+}
+
+task dockerRun(type: Exec) {
+    executable = 'docker-compose'
+    args = ['up', '-d']
+}
+
 /**
  * Generate value file before build
  */

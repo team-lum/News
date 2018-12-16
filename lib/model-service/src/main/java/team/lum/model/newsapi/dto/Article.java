@@ -1,13 +1,13 @@
 package team.lum.model.newsapi.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import java.util.Date;
+import team.lum.model.newsapi.DateDeserializer;
+import team.lum.model.newsapi.DateSerializer;
 
 @Data
 @Accessors(chain = true)
@@ -15,15 +15,15 @@ import java.util.Date;
 public class Article {
 
     @Id
-    private String id;
+    @JsonDeserialize(using = DateDeserializer.class)
+    @JsonSerialize(using = DateSerializer.class)
+    private Long publishedAt;
 
+    private String url;
     private Source source;
-
     private String author;
     private String title;
     private String description;
-    private String url;
     private String urlToImage;
-    private Date publishedAt;
     private String content;
 }
