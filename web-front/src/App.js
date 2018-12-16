@@ -20,15 +20,12 @@ class App extends Component {
 
         this.http = new Http();
 
-        this.http.get(`${articleUrl}?page=${this.state.page}&size=${this.state.pageSize}`, (json) => {
-            console.log(json.content);
-                this.state.articles.push(json.content);
-                this.setState({
-                    articles: json.content,
-                    page: this.state.page,
-                    pageSize: this.state.pageSize
-                });
-            }
+        this.http.get(`${articleUrl}?page=${this.state.page}&size=${this.state.pageSize}`, (json) =>
+            this.setState({
+                articles: json.content,
+                page: this.state.page,
+                pageSize: this.state.pageSize
+            })
         );
 
         this.http.get(versionUrl, (json) =>
@@ -39,7 +36,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <React.Fragment>
                 <div>

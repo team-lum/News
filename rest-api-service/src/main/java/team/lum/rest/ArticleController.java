@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import team.lum.elastic.repository.ArticleRepository;
 import team.lum.model.newsapi.dto.Article;
@@ -28,4 +29,8 @@ public class ArticleController {
         return ResponseEntity.ok(articleRepository.findAll(pageable));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<Page<Article>> getByKeyword(@RequestParam("keyword") String keyword, Pageable pageable) {
+        return ResponseEntity.ok(articleRepository.findByKeyword(keyword, pageable));
+    }
 }
