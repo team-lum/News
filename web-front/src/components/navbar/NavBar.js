@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 import './NavBar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+
 class NavBar extends Component {
     render() {
         return (
-            <nav className={'navbar navbar-expand-lg navbar-light bg-light'}>
-                <a className={'navbar-brand'} href="#">News</a>
+            <nav className={'navbar navbar-expand-lg navbar-light bg-dark'}>
+                <a className={'brand navbar-brand'} href="#"><strong>NEWS</strong></a>
 
                 {/*<div className="App">*/}
                     {/*<header className="App-header">*/}
-                        {/*<img src={logo} className="App-logo" alt="logo"/>*/}
+                        {/*<img url={'src/logo.png'} className="App-logo" alt="logo"/>*/}
                     {/*</header>*/}
                 {/*</div>*/}
 

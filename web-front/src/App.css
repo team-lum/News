@@ -7,3 +7,7 @@
 .list{
     list-style: none;
 }
+
+.divFooter {
+    position: relative;
+}

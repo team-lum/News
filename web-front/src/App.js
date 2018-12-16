@@ -5,6 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Article from "./components/article/Article";
 import Http from "./service/Http";
+import Alert from "./components/alert/Alert"
 import {articleUrl, versionUrl} from "./Urls";
 
 class App extends Component {
@@ -15,16 +16,18 @@ class App extends Component {
         this.state = {
             articles: [],
             page: 0,
-            pageSize: 3
+            pageSize: 3,
+            errors: [{
+                title: 'Warning',
+                message:'Some'
+            }]
         };
 
         this.http = new Http();
 
         this.http.get(`${articleUrl}?page=${this.state.page}&size=${this.state.pageSize}`, (json) =>
             this.setState({
-                articles: json.content,
-                page: this.state.page,
-                pageSize: this.state.pageSize
+                articles: json.content
             })
         );
 
@@ -33,6 +36,10 @@ class App extends Component {
                 api_version: json.value
             })
         );
+
+        setTimeout(() => this.setState({
+            errors: []
+        }), 5000)
     }
 
     render() {
@@ -53,6 +60,12 @@ class App extends Component {
                     </ul>
                 </div>
                 <div>
+                    {
+                        this.state.errors.map((error) => <Alert message={error.message} title={error.title}/>)
+                    }
+                </div>
+
+                <div className={'divFooter'}>
                     <Footer api_version={this.state.api_version}/>
                 </div>
 
