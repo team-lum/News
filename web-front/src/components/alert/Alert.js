@@ -10,7 +10,7 @@ class Alert extends Component{
         return (
             (message || title) &&
             <div className="alert alert-danger alert-dismissible fade show text-center" role="alert">
-                <strong>{title}</strong> <br/> {message}.
+                <strong>{title}</strong> {message}
             </div>
         );
     }
