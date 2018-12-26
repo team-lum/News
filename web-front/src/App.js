@@ -5,9 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Article from "./components/article/Article";
 import Http from "./service/Http";
-import Alert from "./components/alert/Alert"
 import {articleUrl, versionUrl} from "./Urls";
-import Error from "./model/Error";
 
 class App extends Component {
 
@@ -18,68 +16,70 @@ class App extends Component {
             articles: [],
             page: 0,
             pageSize: 3,
-            errors: []
+            search: false
         };
 
         this.http = new Http();
 
-        this.getArticles();
-        this.getVersion();
-
-        this.nextPage = this.nextPage.bind(this);
     }
 
-    getVersion() {
+    componentDidMount() {
+        this.nextPage();
+        this.getVersion();
+        window.addEventListener('scroll', this.listenScrollEvent);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.listenScrollEvent);
+    }
+
+    getVersion = () =>  {
         this.http.get(
             versionUrl,
             (json) =>
                 this.setState({
                     api_version: json.value
-                }),
-            (error) => this.addToError(new Error('Can not get version', ''))
+                })
         );
-    }
+    };
 
-    getArticles() {
-        this.http.get(`${articleUrl}?page=${this.state.page}&size=${this.state.pageSize}`, (json) =>
-                this.setState({
-                    articles: json.content
-                }),
-            (error) => this.addToError(new Error('Can not get articles', ''))
+    getArticles = () => {
+        this.http.get(`${articleUrl}?page=${this.state.page}&size=${this.state.pageSize}`,
+            (json) =>
+                this.setState(previousState => ({
+                    articles: [...previousState.articles, ...json.content],
+                    loadMoreVisible: json.content.last
+                }))
         );
-    }
+    };
 
-    addToError(error) {
-        let errors = this.state.errors;
-        errors.push(error);
-        this.setState({
-            errors: errors
-        });
-
-        setTimeout(() => {
-            let errors = this.state.errors;
-            errors.pop();
-            this.setState({
-                errors: errors
-            });
-        }, 2000)
-    }
-
-    nextPage(e) {
-        this.setState({
-            page: this.state.page + 1
-        });
+    nextPage = () =>  {
+        this.setState( prevState => ({
+            page: prevState.page + 1
+        }));
         this.getArticles();
-    }
+    };
+
+    listenScrollEvent = () =>  {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            this.nextPage();
+        }
+    };
+
+    setSearchType = () => {
+        this.setState(prevState => ({
+            search: !prevState.search
+        }));
+    };
 
 
     render() {
         return (
             <React.Fragment>
                 <div>
-                    <NavBar/>
+                    <NavBar changeSearcheType={this.setSearchType}/>
                 </div>
-                <div className={'articleList container'}>
+                <div className={'articleList container'} >
                     <ul>
                         {
                             this.state.articles.map((article) =>
@@ -90,15 +90,7 @@ class App extends Component {
                         }
                     </ul>
                 </div>
-                <div>
-                    {
-                        this.state.errors.map((error) => <Alert message={error.message} title={error.title}/>)
-                    }
-                </div>
 
-                <div>
-                    <button className={'showMore'} onClick={this.nextPage}>Load more</button>
-                </div>
 
                 <div className={'divFooter'}>
                     <Footer api_version={this.state.api_version}/>

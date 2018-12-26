@@ -42,7 +42,7 @@ Be happy to use this project
 ## Docker
 To run project with docker (Linux):
 - *sudo apt-get install docker-compose* (Or install docker-compose in different way) <br/>
-- *./gradlew clean copyWebFront build* (Build project) <br/>
+- *./gradlew clean build* (Build project) <br/>
 - *sudo docker-compose up* (Build and run docker images. If elk container will fall, follow this [link](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html)) <br/>
 Or just run: <br/>
--*./gradlew clean copyWebFront build dockerBuild dockerRun* <br/>
+-*./gradlew clean build dockerRun* <br/>
