@@ -1,39 +1,88 @@
-.App {
-    text-align: center;
-    max-height: 70%;
+.articleList{
+    width: 55%;
+    position: center;
 }
 
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 40vmin;
+.list{
+    list-style: none;
 }
 
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+.showMore {
+    position: relative;
+    margin-top: 30px ;
+    margin-bottom: 60px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px 10px;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #28a745;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: 1s;
+    border: solid #28a745;
+    border-radius: 7px;
+    background: rgba(153, 170, 177, 0.56);
 }
 
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-html, body {
-    margin: 0;
+.showMore:before{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    overflow: hidden
+    background: #28a745;
+    z-index: -1;
+    transition: 1s;
+    transform: rotateY(90deg);
+}
+
+.showMore:after{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #28a745;
+    z-index: -1;
+    transition: 1s;
+    transform: rotateX(90deg);
+}
+
+.showMore:hover:before{
+    transform: rotateY(0deg);
+}
+
+.showMore:hover:after{
+    transform: rotateX(0deg);
+}
+
+.showMore:hover{
+    color: #28a745;
+}
+
+.search {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.newsTransition-enter {
+    opacity: 0.01;
+}
+
+.newsTransition-enter.newsTransition-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.newsTransition-leave {
+    opacity: 1;
+}
+
+.newsTransition-leave.newsTransition-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
 }

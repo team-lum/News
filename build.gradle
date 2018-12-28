@@ -19,6 +19,8 @@ subprojects {
     dependencies {
         compile("org.springframework.boot:spring-boot-starter-web:2.1.1.RELEASE")
         compile("org.springframework.boot:spring-boot-starter-data-elasticsearch:2.1.1.RELEASE")
+        compile ("org.springframework.boot:spring-boot-starter-aop:2.1.1.RELEASE")
+        compile("org.springframework.retry:spring-retry:1.2.2.RELEASE")
 
         compile("org.projectlombok:lombok:1.18.2")
 
@@ -66,7 +68,7 @@ task getGitVersion(type: Exec) {
 /**
  * Generate file with value value for runnable modules
  */
-task generateVersion(dependsOn: 'getGitVersion') {
+task generateVersion(dependsOn: ['getGitVersion']) {
 
     def version = tasks.getGitVersion.standardOutput
 
@@ -81,6 +83,9 @@ task generateVersion(dependsOn: 'getGitVersion') {
     }
 }
 
+/**
+ * Delete value.json file
+ */
 task cleanVersion(type:Delete) {
     doLast {
         subprojects.each { module ->
@@ -91,21 +96,7 @@ task cleanVersion(type:Delete) {
     }
 }
 
-/**
- * Generate value file before build
- */
-task build(dependsOn: 'generateVersion')
-
-/**
- * Generate value file before build
- */
-task test(dependsOn: 'generateVersion')
-
-
-/**
- * Delete value.json file
- */
-task clean(dependsOn: 'cleanVersion')
+task clean(dependsOn: ['cleanVersion'])
 
 /**
  * ========================== Web front tasks ==========================
@@ -115,7 +106,28 @@ task buildWebFront(type:Exec) {
     commandLine 'npm', 'run', 'build'
 }
 
-task copyWebFront(type: Copy, dependsOn: 'buildWebFront') {
+task copyWebFront(type: Copy, dependsOn: ['buildWebFront']) {
     from 'web-front/build'
     into 'rest-api-service/src/main/resources/static'
+}
+
+/**
+ * Generate value file before build
+ */
+task build(dependsOn: ['generateVersion', 'copyWebFront'])
+
+/**
+ * Generate value file before build
+ */
+task test(dependsOn: ['generateVersion'])
+
+
+task dockerBuild(type: Exec) {
+    executable = 'docker-compose'
+    args = ['build']
+}
+
+task dockerRun(type: Exec, dependsOn: ['dockerBuild']) {
+    executable = 'docker-compose'
+    args = ['up', '-d']
 }

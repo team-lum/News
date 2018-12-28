@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Footer from "./Footer";
+import Article from "./Article";
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Footer/>, div);
+  const article = {};
+  ReactDOM.render(<Article news={article}/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });
