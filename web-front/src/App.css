@@ -1,15 +1,10 @@
 .articleList{
     width: 55%;
-    height: 70%;
     position: center;
 }
 
 .list{
     list-style: none;
-}
-
-.divFooter {
-    position: relative;
 }
 
 .showMore {
@@ -67,4 +62,27 @@
 
 .showMore:hover{
     color: #28a745;
+}
+
+.search {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.newsTransition-enter {
+    opacity: 0.01;
+}
+
+.newsTransition-enter.newsTransition-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.newsTransition-leave {
+    opacity: 1;
+}
+
+.newsTransition-leave.newsTransition-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
 }

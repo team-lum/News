@@ -19,6 +19,8 @@ subprojects {
     dependencies {
         compile("org.springframework.boot:spring-boot-starter-web:2.1.1.RELEASE")
         compile("org.springframework.boot:spring-boot-starter-data-elasticsearch:2.1.1.RELEASE")
+        compile ("org.springframework.boot:spring-boot-starter-aop:2.1.1.RELEASE")
+        compile("org.springframework.retry:spring-retry:1.2.2.RELEASE")
 
         compile("org.projectlombok:lombok:1.18.2")
 
